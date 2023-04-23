@@ -27,7 +27,7 @@ final class CreditManager {
             case "5":
                 getGradePerAverage()
             case "X":
-                break
+                finish()
             default:
                 inputError()
             }
@@ -77,6 +77,10 @@ final class CreditManager {
 
     private func getGradePerAverage() {
         print("5")
+    }
+    
+    private func finish() {
+        print("프로그램을 종료합니다...")
     }
 
     private func inputError() {
