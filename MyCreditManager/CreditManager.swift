@@ -36,7 +36,7 @@ final class CreditManager {
     }
     
     private func getInputValue() -> String {
-        print("원하는 기능을 입력해주세요.")
+        print("\n원하는 기능을 입력해주세요.")
         print("1: 학생추가, 2: 학생삭제, 3: 성적추가(변경), 4: 성적삭제, 5: 평점보기, X: 종료")
         
         return String(readLine()!)
@@ -79,7 +79,27 @@ final class CreditManager {
     }
 
     private func insertOrUpdateGrade() {
-        print("3")
+        print("성적을 추가할 학생의 이름, 과목 이름, 성적(A+, A, F 등)을 띄어쓰기로 구분하여 차례로 작성해주세요.")
+        print("입력예) Mickey Swift A+")
+        print("만약에 학생의 성적 중 해당 과목이 존재하면 기존 점수가 갱신됩니다.")
+        
+        let input = readLine()!.split(separator: " ").map { String($0) }
+        
+        guard input.count == 3 else {
+            print("입력이 잘못되었습니다. 다시 확인해주세요.")
+            return
+        }
+        
+        let (name, subjectName, grade) = (input[0], input[1], input[2])
+        
+        guard studentList.contains(where: { $0.name == name }) else {
+            print("\(name) 이름을 갖는 학생은 존재하지 않습니다.")
+            return
+        }
+        let index = studentList.firstIndex(where: { $0.name == name })
+        
+        studentList[index!].addGrade(name: subjectName, grade: grade)
+        print("\(name) 학생의 \(subjectName) 과목이 \(grade)로 추가(변경)되었습니다.")
     }
 
     private func deleteGrade() {
