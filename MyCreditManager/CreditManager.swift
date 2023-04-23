@@ -98,8 +98,13 @@ final class CreditManager {
         }
         
         if let index = studentList.firstIndex(where: { $0.name == name }) {
-            studentList[index].addGrade(name: subjectName, grade: grade)
-            print("\(name) 학생의 \(subjectName) 과목이 \(grade)로 추가(변경)되었습니다.")
+            if let grade = Grade(rawValue: grade) {
+                studentList[index].addGrade(name: subjectName, grade: grade)
+                print("\(name) 학생의 \(subjectName) 과목이 \(grade.rawValue)로 추가(변경)되었습니다.")
+                
+            } else {
+                print("학점을 정확하게 입력해주세요.")
+            }
         }
     }
 
