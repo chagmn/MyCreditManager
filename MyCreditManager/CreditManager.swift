@@ -93,13 +93,14 @@ final class CreditManager {
         let (name, subjectName, grade) = (input[0], input[1], input[2])
         
         guard studentList.contains(where: { $0.name == name }) else {
-            print("\(name) 이름을 갖는 학생은 존재하지 않습니다.")
+            print("\(name) 학생을 찾지 못했습니다.")
             return
         }
-        let index = studentList.firstIndex(where: { $0.name == name })
         
-        studentList[index!].addGrade(name: subjectName, grade: grade)
-        print("\(name) 학생의 \(subjectName) 과목이 \(grade)로 추가(변경)되었습니다.")
+        if let index = studentList.firstIndex(where: { $0.name == name }) {
+            studentList[index].addGrade(name: subjectName, grade: grade)
+            print("\(name) 학생의 \(subjectName) 과목이 \(grade)로 추가(변경)되었습니다.")
+        }
     }
 
     private func deleteGrade() {

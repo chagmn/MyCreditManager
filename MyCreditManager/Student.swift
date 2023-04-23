@@ -17,7 +17,9 @@ final class Student {
     }
     
     func addGrade(name: String, grade: String) {
-        subject = Subject(name: name, grade: grade)
+        subject.append(Subject(name: name, grade: grade))
+    }
+    
     func removeGrade(name: String) -> Bool {
         if let index = subject.firstIndex(where: { $0.name == name }) {
             subject.remove(at: index)
