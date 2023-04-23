@@ -9,6 +9,7 @@ import Foundation
 
 final class CreditManager {
     private var inputValue = ""
+    private var studentList = [Student]()
     
     func execute() {
         repeat {
@@ -42,6 +43,24 @@ final class CreditManager {
     }
 
     private func insertStudent() {
+        print("추가할 학생의 이름을 입력해주세요")
+        
+        let name = String(readLine()!)
+        guard name != "" else {
+            print("입력이 잘못되었습니다. 다시 확인해주세요.")
+            return
+        }
+        
+        
+        if studentList.contains(where: { $0.name == name }) {
+            print("\(name)은 이미 존재하는 학생입니다. 추가하지 않습니다.")
+            
+        } else {
+            print("\(name) 학생을 추가했습니다.")
+            
+            let student = Student(name: name)
+            studentList.append(student)
+        }
     }
 
     private func deleteStudent() {
