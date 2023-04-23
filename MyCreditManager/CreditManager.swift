@@ -103,7 +103,30 @@ final class CreditManager {
     }
 
     private func deleteGrade() {
-        print("4")
+        print("성적을 삭제할 학생의 이름, 과목 이름을 띄어쓰기로 구분하여 차례로 작성해주세요.")
+        print("입력예) Mickey Swift")
+        
+        let input = readLine()!.split(separator: " ").map { String($0) }
+        
+        guard input.count == 2 else {
+            print("입력이 잘못되었습니다. 다시 확인해주세요.")
+            return
+        }
+        
+        let (name, subjectName) = (input[0], input[1])
+        
+        guard studentList.contains(where: { $0.name == name }) else {
+            print("\(name) 학생을 찾지 못했습니다.")
+            return
+        }
+        
+        if let index = studentList.firstIndex(where: { $0.name == name }) {
+            if studentList[index].removeGrade(name: subjectName) {
+                print("\(name) 학생의 \(subjectName) 과목이 삭제되었습니다.")
+            } else {
+                print("\(name) 학생의 \(subjectName) 과목을 수강중이지 않습니다.")
+            }
+        }
     }
 
     private func getGradePerAverage() {
