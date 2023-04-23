@@ -131,7 +131,22 @@ final class CreditManager {
     }
 
     private func getGradePerAverage() {
-        print("5")
+        print("평점을 알고싶은 학생의 이름을 입력해주세요.")
+        
+        let name = String(readLine()!)
+        guard name != "" else {
+            print("입력이 잘못되었습니다. 다시 확인해주세요.")
+            return
+        }
+        
+        guard studentList.contains(where: { $0.name == name }) else {
+            print("\(name) 학생을 찾지 못했습니다.")
+            return
+        }
+        
+        if let index = studentList.firstIndex(where: { $0.name == name }) {
+            studentList[index].showGradePerAverage()
+        }
     }
     
     private func finish() {

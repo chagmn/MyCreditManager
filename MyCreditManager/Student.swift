@@ -16,7 +16,7 @@ final class Student {
         self.subject = [Subject]()
     }
     
-    func addGrade(name: String, grade: String) {
+    func addGrade(name: String, grade: Grade) {
         subject.append(Subject(name: name, grade: grade))
     }
     
@@ -28,5 +28,14 @@ final class Student {
         } else {
             return false
         }
+    }
+    
+    func showGradePerAverage() {
+        var sum = 0.0
+        subject.forEach {
+            print("\($0.name): \($0.grade.rawValue)")
+            sum += $0.grade.score
+        }
+        print("평점 : \(sum/Double(subject.count))")
     }
 }
