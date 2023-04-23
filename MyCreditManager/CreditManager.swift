@@ -64,7 +64,18 @@ final class CreditManager {
     }
 
     private func deleteStudent() {
-        print("2")
+        print("삭제할 학생의 이름을 입력해주세요")
+        let name = String(readLine()!)
+        
+        if studentList.contains(where: { $0.name == name }) {
+            print("\(name) 학생을 삭제하였습니다.")
+            
+            let index = studentList.firstIndex(where: { $0.name == name })
+            studentList.remove(at: index!)
+            
+        } else {
+            print("\(name) 학생을 찾지 못했습니다.")
+        }
     }
 
     private func insertOrUpdateGrade() {
